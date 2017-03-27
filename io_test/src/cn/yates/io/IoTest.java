@@ -84,4 +84,54 @@ public class IoTest {
 		String getStr = new String(bytes, 0, len);
 		System.out.println(getStr);
 	}
+	
+	private static void readAndWrite() throws IOExcetion {
+		StringBuffer  str       = null;   
+		DataInputStream  bi = null;  
+		FileInputStream      fi = null;  
+		DataOutputStream bo = null;  
+		FileOutputStream     fo = null;  
+		File[]   file           = new File[5];  
+			      file[0]   = new File("E:\\haha\\1.mp3");  
+			      file[1]   = new File("E:\\haha\\2.mp3");  
+			      file[2]   = new File("E:\\haha\\3.mp3");  
+			      file[3]   = new File("E:\\haha\\4.mp3");  
+			      file[4]   = new File("E:\\haha\\5.mp3");  
+
+		try {  
+		    byte[] byt = null;  
+		    for(int i =0;i<file.length;i++){  
+			fi = new FileInputStream(file[i]);  
+			bi = new DataInputStream(fi);  
+			int next = 0;  
+			 byt= new byte[bi.available()];  
+			while((next=bi.read())!=-1){  
+			    bi.read(byt);  
+
+			}  
+			fo = new FileOutputStream("E:\\haha\\123.mp3",true);  
+			bo = new DataOutputStream(fo);  
+			bo.write(byt);  
+		    }  
+
+		} catch (FileNotFoundException e) {  
+		    // TODO Auto-generated catch block  
+		    e.printStackTrace();  
+		} catch (IOException e) {  
+		    // TODO Auto-generated catch block  
+		    e.printStackTrace();  
+		}finally{  
+		    try {  
+
+			bi.close();  
+			bo.flush();  
+			bo.close();  
+		    } catch (IOException e) {  
+			// TODO Auto-generated catch block  
+			e.printStackTrace();  
+		    }  
+
+
+		} 
+	}	
 }
